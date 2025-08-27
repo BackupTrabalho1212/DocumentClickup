@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClickUp - Guia Completo para Estudantes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            color: #7b68ee;
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .nav-btn {
+            background: linear-gradient(45deg, #7b68ee, #9575ff);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(123, 104, 238, 0.3);
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(123, 104, 238, 0.5);
+        }
+
+        .nav-btn.active {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e53);
+            transform: translateY(-2px);
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            display: none;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .section h2 {
+            color: #7b68ee;
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .section h3 {
+            color: #555;
+            font-size: 1.8rem;
+            margin: 25px 0 15px 0;
+            border-left: 4px solid #7b68ee;
+            padding-left: 15px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(240, 147, 251, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-card h4 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .structure-hierarchy {
+            background: linear-gradient(45deg, #4facfe, #00f2fe);
+            padding: 30px;
+            border-radius: 15px;
+            color: white;
+            margin: 25px 0;
+        }
+
+        .hierarchy-level {
+            margin: 15px 0;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            border-left: 4px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .example-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            margin: 15px 0;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .benefits-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .benefit-item {
+            background: linear-gradient(45deg, #43e97b, #38f9d7);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: 600;
+            box-shadow: 0 6px 18px rgba(67, 233, 123, 0.3);
+        }
+
+        .activity-box {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 25px 0;
+            box-shadow: 0 10px 25px rgba(250, 112, 154, 0.3);
+        }
+
+        .activity-steps {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        .activity-steps ol {
+            margin-left: 20px;
+        }
+
+        .activity-steps li {
+            margin: 10px 0;
+            font-size: 1.1rem;
+        }
+
+        .intro-text {
+            font-size: 1.2rem;
+            text-align: center;
+            color: #666;
+            margin: 25px 0;
+            line-height: 1.8;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+
+            .navigation {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-btn {
+                width: 200px;
+            }
+
+            .section {
+                padding: 25px;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📋 ClickUp</h1>
+            <p>Ferramenta de Gestão e Produtividade</p>
+            <p style="font-size: 1.1rem; color: #7b68ee; font-weight: 600;">Organização, Colaboração e Resultados em um só lugar</p>
+        </div>
+
+        <div class="navigation">
+            <button class="nav-btn active" onclick="showSection('intro')">O que é?</button>
+            <button class="nav-btn" onclick="showSection('objectives')">Objetivos</button>
+            <button class="nav-btn" onclick="showSection('features')">Funcionalidades</button>
+            <button class="nav-btn" onclick="showSection('benefits')">Benefícios</button>
+            <button class="nav-btn" onclick="showSection('structure')">Estrutura</button>
+            <button class="nav-btn" onclick="showSection('examples')">Exemplos</button>
+            <button class="nav-btn" onclick="showSection('activity')">Atividade</button>
+        </div>
+
+        <div id="intro" class="section active">
+            <h2>🚀 O que é o ClickUp?</h2>
+            <p class="intro-text">
+                O ClickUp é uma plataforma completa de <strong>gestão de projetos, tarefas e colaboração</strong> que revoluciona a forma como equipes trabalham juntas.
+            </p>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>🎯 Centralização Total</h4>
+                    <p>Todas as informações da equipe em um só lugar, eliminando a necessidade de usar múltiplas ferramentas.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h4>📈 Escalabilidade</h4>
+                    <p>Ideal para empresas de qualquer porte, desde startups até grandes corporações.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h4>🔄 Flexibilidade</h4>
+                    <p>Adapta-se a diferentes metodologias de trabalho e estilos de gestão.</p>
+                </div>
+            </div>
+
+            <div style="background: linear-gradient(45deg, #f093fb, #f5576c); color: white; padding: 25px; border-radius: 15px; margin-top: 30px; text-align: center;">
+                <h3 style="color: white; border: none; padding: 0; margin-bottom: 15px;">💡 Por que escolher o ClickUp?</h3>
+                <p style="font-size: 1.1rem;">É a solução definitiva para quem busca organização, produtividade e resultados mensuráveis em um ambiente colaborativo.</p>
+            </div>
+        </div>
+
+        <div id="objectives" class="section">
+            <h2>🎯 Principais Objetivos</h2>
+            
+            <div class="benefits-list">
+                <div class="benefit-item">
+                    <h4>📋 Centralizar</h4>
+                    <p>Tarefas e processos em um local único</p>
+                </div>
+                
+                <div class="benefit-item">
+                    <h4>💬 Comunicar</h4>
+                    <p>Melhorar a comunicação interna da equipe</p>
+                </div>
+                
+                <div class="benefit-item">
+                    <h4>⏰ Acompanhar</h4>
+                    <p>Prazos e metas de forma eficiente</p>
+                </div>
+                
+                <div class="benefit-item">
+                    <h4>📊 Aumentar</h4>
+                    <p>A produtividade geral da organização</p>
+                </div>
+            </div>
+
+            <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 30px; border-radius: 15px; margin-top: 30px;">
+                <h3 style="color: white; border: none; padding: 0; text-align: center;">🌟 Resultado Final</h3>
+                <p style="text-align: center; font-size: 1.2rem; margin-top: 15px;">
+                    Uma equipe mais alinhada, eficiente e focada em resultados mensuráveis.
+                </p>
+            </div>
+        </div>
+
+        <div id="features" class="section">
+            <h2>⚙️ Funcionalidades-Chave</h2>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>📝 Gestão de Tarefas</h4>
+                    <p>• Listas organizadas<br>
+                    • Quadros Kanban<br>
+                    • Vista de calendário<br>
+                    • Gantt charts</p>
+                </div>
+
+                <div class="feature-card">
+                    <h4>🤝 Colaboração</h4>
+                    <p>• Comentários em tempo real<br>
+                    • Menções a membros<br>
+                    • Integração com chat<br>
+                    • Notificações por e-mail</p>
+                </div>
+
+                <div class="feature-card">
+                    <h4>📊 Relatórios e Dashboards</h4>
+                    <p>• Métricas de desempenho<br>
+                    • Gráficos customizáveis<br>
+                    • Análise de produtividade<br>
+                    • Relatórios automáticos</p>
+                </div>
+
+                <div class="feature-card">
+                    <h4>📚 Documentação</h4>
+                    <p>• Wikis internos<br>
+                    • Edição colaborativa<br>
+                    • Base de conhecimento<br>
+                    • Templates reutilizáveis</p>
+                </div>
+
+                <div class="feature-card">
+                    <h4>🔄 Automação</h4>
+                    <p>• Workflows automáticos<br>
+                    • Regras personalizadas<br>
+                    • Triggers inteligentes<br>
+                    • Economia de tempo</p>
+                </div>
+
+                <div class="feature-card">
+                    <h4>🔗 Integrações</h4>
+                    <p>• Google Drive<br>
+                    • Slack & Microsoft Teams<br>
+                    • GitHub & GitLab<br>
+                    • 1000+ aplicações</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="benefits" class="section">
+            <h2>✨ Benefícios para a Empresa</h2>
+
+            <div class="feature-grid">
+                <div class="feature-card" style="background: linear-gradient(135deg, #43e97b, #38f9d7);">
+                    <h4>🚀 Produtividade</h4>
+                    <p>Aumento significativo na eficiência das equipes através de processos otimizados e automatizados.</p>
+                </div>
+
+                <div class="feature-card" style="background: linear-gradient(135deg, #fa709a, #fee140);">
+                    <h4>👁️ Transparência</h4>
+                    <p>Visibilidade completa do progresso dos projetos e desempenho individual de cada membro.</p>
+                </div>
+
+                <div class="feature-card" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                    <h4>🎨 Personalização</h4>
+                    <p>Adaptação total para qualquer área: TI, Marketing, Vendas, RH, Financeiro e muito mais.</p>
+                </div>
+
+                <div class="feature-card" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">
+                    <h4>✅ Qualidade</h4>
+                    <p>Redução drástica de erros e retrabalho através de processos bem definidos e monitoramento.</p>
+                </div>
+            </div>
+
+            <div class="activity-box">
+                <h3 style="color: white; border: none; padding: 0; text-align: center; margin-bottom: 20px;">📈 Impacto Mensurável</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; text-align: center;">
+                    <div><strong>+40%</strong><br>Produtividade</div>
+                    <div><strong>-60%</strong><br>Tempo em reuniões</div>
+                    <div><strong>+85%</strong><br>Satisfação da equipe</div>
+                    <div><strong>-75%</strong><br>Erros de comunicação</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="structure" class="section">
+            <h2>🏗️ Estrutura de Trabalho no ClickUp</h2>
+            
+            <p class="intro-text">
+                O ClickUp organiza o trabalho em uma hierarquia lógica e intuitiva:
+            </p>
+
+            <div class="structure-hierarchy">
+                <div class="hierarchy-level">
+                    <h4>🏢 Workspace</h4>
+                    <p>Área geral da empresa - O nível mais alto onde tudo começa</p>
+                </div>
+
+                <div class="hierarchy-level" style="margin-left: 20px;">
+                    <h4>🏠 Spaces</h4>
+                    <p>Departamentos ou áreas específicas (Marketing, TI, Vendas, etc.)</p>
+                </div>
+
+                <div class="hierarchy-level" style="margin-left: 40px;">
+                    <h4>📁 Folders</h4>
+                    <p>Agrupamento de projetos relacionados dentro de cada Space</p>
+                </div>
+
+                <div class="hierarchy-level" style="margin-left: 60px;">
+                    <h4>📋 Lists</h4>
+                    <p>Listas de tarefas organizadas por projeto específico</p>
+                </div>
+
+                <div class="hierarchy-level" style="margin-left: 80px;">
+                    <h4>✅ Tasks & Subtasks</h4>
+                    <p>Execução detalhada - onde o trabalho realmente acontece</p>
+                </div>
+            </div>
+
+            <div style="background: linear-gradient(45deg, #f093fb, #f5576c); color: white; padding: 25px; border-radius: 15px; margin-top: 30px;">
+                <h3 style="color: white; border: none; padding: 0; text-align: center;">💡 Flexibilidade Total</h3>
+                <p style="text-align: center; margin-top: 15px;">
+                    Você pode usar todos os níveis ou apenas os que fazem sentido para sua equipe. A estrutura se adapta ao seu fluxo de trabalho!
+                </p>
+            </div>
+        </div>
+
+        <div id="examples" class="section">
+            <h2>💼 Exemplos de Uso na Prática</h2>
+
+            <div class="example-card">
+                <h3 style="color: white; border: none; padding: 0;">💻 Departamento de TI</h3>
+                <p><strong>Uso:</strong> Gestão de demandas e chamados técnicos</p>
+                <p><strong>Benefícios:</strong> Priorização automática, SLA controlado, histórico completo</p>
+                <p><strong>Features:</strong> Templates de tickets, automação de status, relatórios de performance</p>
+            </div>
+
+            <div class="example-card">
+                <h3 style="color: white; border: none; padding: 0;">📱 Equipe de Marketing</h3>
+                <p><strong>Uso:</strong> Planejamento e execução de campanhas</p>
+                <p><strong>Benefícios:</strong> Calendário editorial, aprovações organizadas, ROI mensurado</p>
+                <p><strong>Features:</strong> Timeline de conteúdo, proof & approval, integração com redes sociais</p>
+            </div>
+
+            <div class="example-card">
+                <h3 style="color: white; border: none; padding: 0;">🎧 Suporte ao Cliente</h3>
+                <p><strong>Uso:</strong> Acompanhamento de tickets e satisfação</p>
+                <p><strong>Benefícios:</strong> Tempo de resposta otimizado, histórico centralizado, métricas claras</p>
+                <p><strong>Features:</strong> Sistema de prioridades, chat integrado, pesquisas automáticas</p>
+            </div>
+
+            <div class="example-card">
+                <h3 style="color: white; border: none; padding: 0;">🚀 Projetos Internos</h3>
+                <p><strong>Uso:</strong> Organização de entregas e milestones</p>
+                <p><strong>Benefícios:</strong> Visibilidade total, recursos otimizados, prazos cumpridos</p>
+                <p><strong>Features:</strong> Gantt charts, dependências, gestão de recursos</p>
+            </div>
+
+            <div style="background: linear-gradient(135deg, #43e97b, #38f9d7); color: white; padding: 25px; border-radius: 15px; margin-top: 30px; text-align: center;">
+                <h3 style="color: white; border: none; padding: 0;">🌟 Versatilidade Total</h3>
+                <p style="font-size: 1.1rem; margin-top: 15px;">
+                    O ClickUp se adapta a qualquer área ou processo da sua empresa. Desde operações simples até projetos complexos!
+                </p>
+            </div>
+        </div>
+
+        <div id="activity" class="section">
+            <h2>🎯 Atividade Prática para a Sala</h2>
+            
+            <div class="activity-box">
+                <h3 style="color: white; border: none; padding: 0; text-align: center;">🚀 Vamos Praticar!</h3>
+                <p style="text-align: center; margin: 15px 0; font-size: 1.2rem;">
+                    Agora é hora de colocar a mão na massa e aplicar tudo que aprenderam sobre o ClickUp!
+                </p>
+            </div>
+
+            <div class="activity-steps">
+                <h3>📋 Sua Missão:</h3>
+                <p style="margin: 15px 0; font-size: 1.1rem;">
+                    <strong>Projeto:</strong> Organizar um evento fictício (festa de formatura, workshop, conferência, etc.)
+                </p>
+                
+                <h4 style="margin: 20px 0 10px 0; color: #7b68ee;">✅ Passos a seguir:</h4>
+                <ol>
+                    <li><strong>Criar uma lista de tarefas no ClickUp</strong> para seu projeto escolhido</li>
+                    <li><strong>Definir responsáveis e prazos</strong> realistas para cada tarefa</li>
+                    <li><strong>Criar subtarefas e checklists</strong> detalhados</li>
+                    <li><strong>Compartilhar o resultado</strong> com a turma para discussão</li>
+                </ol>
+            </div>
+
+            <div class="feature-grid" style="margin-top: 30px;">
+                <div class="feature-card" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                    <h4>💡 Dicas para o Sucesso</h4>
+                    <p>• Use tags para categorizar<br>
+                    • Defina prioridades claras<br>
+                    • Adicione descrições detalhadas<br>
+                    • Configure notificações</p>
+                </div>
+
+                <div class="feature-card" style="background: linear-gradient(135deg, #fa709a, #fee140);">
+                    <h4>⏱️ Tempo Sugerido</h4>
+                    <p>• 15 min: Criação da estrutura<br>
+                    • 10 min: Definir responsáveis<br>
+                    • 10 min: Subtarefas/checklists<br>
+                    • 10 min: Apresentação</p>
+                </div>
+            </div>
+
+            <div style="background: linear-gradient(45deg, #4facfe, #00f2fe); color: white; padding: 25px; border-radius: 15px; margin-top: 30px; text-align: center;">
+                <h3 style="color: white; border: none; padding: 0;">🏆 Objetivo Final</h3>
+                <p style="font-size: 1.1rem; margin-top: 15px;">
+                    Ao final desta atividade, vocês terão experiência prática com o ClickUp e poderão aplicar esses conhecimentos em projetos reais!
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Remove active class from all buttons
+            const buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach(button => {
+                button.classList.remove('active');
+            });
+
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+
+            // Smooth scroll to top of section
+            document.getElementById(sectionId).scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'start' 
+            });
+        }
+
+        // Add smooth loading animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+            });
+
+            // Show first section
+            setTimeout(() => {
+                document.querySelector('.section.active').style.opacity = '1';
+                document.querySelector('.section.active').style.transform = 'translateY(0)';
+            }, 100);
+        });
+
+        // Enhanced section switching with animation
+        function showSection(sectionId) {
+            const currentActive = document.querySelector('.section.active');
+            
+            // Fade out current section
+            if (currentActive) {
+                currentActive.style.opacity = '0';
+                currentActive.style.transform = 'translateY(-20px)';
+                
+                setTimeout(() => {
+                    currentActive.classList.remove('active');
+                    
+                    // Show new section
+                    const newSection = document.getElementById(sectionId);
+                    newSection.classList.add('active');
+                    newSection.style.opacity = '0';
+                    newSection.style.transform = 'translateY(20px)';
+                    
+                    setTimeout(() => {
+                        newSection.style.opacity = '1';
+                        newSection.style.transform = 'translateY(0)';
+                    }, 50);
+                }, 200);
+            }
+
+            // Update navigation
+            const buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach(button => button.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Smooth scroll
+            setTimeout(() => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 300);
+        }
+    </script>
+</body>
+</html>
